@@ -23,7 +23,11 @@ module.exports={
 		//文件优先搜索的目录
 		modules:['node_modules'],
 		//自动解析确定的扩展
-		extensions:['.js','.css','scss']
+		extensions:['*','.js','.css','.scss'],
+		//设置 引入模块的别名  import 'fontcss/font'
+		alias:{
+			fontcss:path.resolve(__dirname,'fonts')
+		}
 	},
 		//模块解析
 	module:{
@@ -40,6 +44,15 @@ module.exports={
 			{
 				test:/\.(woff|woff2|eot|ttf|otf)$/,
 				use:['file-loader'],
+			},
+			{
+				test:/\.js$/,
+				use:{
+					loader:'babel-loader',
+					options:{
+						presets:[['es2015'],['react']]
+					}
+				}
 			}
 		]
 	},
